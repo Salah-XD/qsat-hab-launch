@@ -102,7 +102,7 @@ export function AboutQSATSection() {
               <Button
                 variant="outline"
                 className="w-full bg-transparent"
-                onClick={() => window.open("https://www.qsat-saas-new.vercel.app", "_blank")}
+                onClick={() => window.open("https://qsat-saas.vercel.app/", "_blank")}
               >
                 <ExternalLink className="mr-2 h-4 w-4" />
                 Explore Platform
