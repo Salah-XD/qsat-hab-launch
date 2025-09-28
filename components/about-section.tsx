@@ -16,12 +16,10 @@ export function AboutSection() {
           <div>
             <Badge className="mb-4 bg-primary/20 text-primary border-primary/30">About the Mission</Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-balance">
-              Reaching for the Stars with Student Innovation
+              QSAT HAB EVENT
             </h2>
             <p className="text-lg text-muted-foreground mb-6 text-pretty">
-              The QSAT HAB (High Altitude Balloon) Launch Program represents the pinnacle of student-driven aerospace
-              engineering. Our mission will carry cutting-edge scientific instruments and student-built satellites to
-              the edge of space, reaching altitudes of over 100,000 feet.
+              The QSAT HAB mission propels student-designed payloads and cutting-edge sensors to the edge of space, surpassing 100,000 feet. Along the way, it gathers crucial atmospheric data and demonstrates the power of hands-on aerospace innovation. This near-space journey offers students a chance to explore, experiment, and push the boundaries of science.
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
               <div className="flex items-center space-x-2">
@@ -30,7 +28,7 @@ export function AboutSection() {
               </div>
               <div className="flex items-center space-x-2">
                 <MapPin className="h-5 w-5 text-primary" />
-                <span>Launch Site Alpha</span>
+                <span>Coimbatore,<br></br>Tamil Nadu, India.</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Users className="h-5 w-5 text-primary" />
@@ -42,8 +40,7 @@ export function AboutSection() {
               </div>
             </div>
             <p className="text-muted-foreground text-pretty">
-              This isn't just a launch—it's a celebration of curiosity, innovation, and the boundless potential of young
-              minds reaching for the cosmos.
+              More than a launch, it is a symphony of curiosity, innovation, and the limitless potential of young minds aspiring toward the cosmos.
             </p>
           </div>
         </div>

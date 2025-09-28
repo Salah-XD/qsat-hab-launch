@@ -9,12 +9,10 @@ export function ParkSatSection() {
           <div>
             <Badge className="mb-4 bg-primary/20 text-primary border-primary/30">Student Innovation</Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-balance">
-              ParkSat Kit: Built by Students, For Students
+              ParkSat Kit: Built by Students
             </h2>
             <p className="text-lg text-muted-foreground mb-6 text-pretty">
-              The ParkSat Kit represents months of dedicated work by our student engineering teams. This miniature
-              satellite payload includes advanced sensors, communication systems, and data logging capabilities—all
-              designed and assembled by passionate learners.
+              The ParkSat Kit represents 16 hours of dedicated work by our student innovators. This CubeSat payload includes advanced sensors, communication systems, and data logging capabilities all designed and assembled with the guidance of QSAT’s passionate learners
             </p>
             <div className="space-y-4 mb-6">
               <div className="flex items-start space-x-3">
@@ -37,7 +35,7 @@ export function ParkSatSection() {
                 <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold">Camera System</h4>
-                  <p className="text-sm text-muted-foreground">High-resolution imaging from the stratosphere</p>
+                  <p className="text-sm text-muted-foreground">Capturing the stratosphere in breathtaking detail.</p>
                 </div>
               </div>
             </div>

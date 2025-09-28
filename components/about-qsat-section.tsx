@@ -41,7 +41,7 @@ export function AboutQSATSection() {
               <Button
                 variant="outline"
                 className="w-full bg-transparent"
-                onClick={() => window.open("https://www.labs.qsat.diy", "_blank")}
+                onClick={() => window.open("https://labs.qsat.diy/", "_blank")}
               >
                 <ExternalLink className="mr-2 h-4 w-4" />
                 Visit Store

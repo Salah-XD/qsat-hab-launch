@@ -1,9 +1,10 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Play, ChevronDown } from "lucide-react"
+
 
 interface TimeLeft {
   days: number
@@ -20,6 +21,45 @@ export function HeroSection() {
     seconds: 0,
   })
   const [currentSlide, setCurrentSlide] = useState(0)
+  const starsContainerRef = useRef<HTMLDivElement>(null)
+
+  // Create stars for hero section only
+  useEffect(() => {
+    const container = starsContainerRef.current
+    if (!container) return
+    
+    const containerWidth = container.offsetWidth
+    const containerHeight = container.offsetHeight
+    
+    // Remove existing stars
+    const existingStars = container.querySelectorAll('.star')
+    existingStars.forEach(star => star.remove())
+    
+    // Create stars
+    const starCount = 100
+    for (let i = 0; i < starCount; i++) {
+      const star = document.createElement('div')
+      star.classList.add('star')
+      
+      // Random position
+      const x = Math.random() * containerWidth
+      const y = Math.random() * containerHeight
+      
+      // Random size (1-3px)
+      const size = Math.random() * 2 + 1
+      
+      // Random delay for twinkling animation
+      const delay = Math.random() * 3
+      
+      star.style.width = `${size}px`
+      star.style.height = `${size}px`
+      star.style.left = `${x}px`
+      star.style.top = `${y}px`
+      star.style.animationDelay = `${delay}s`
+      
+      container.appendChild(star)
+    }
+  }, [])
 
   // Countdown to October 15th, 2025
   useEffect(() => {
@@ -69,10 +109,16 @@ export function HeroSection() {
   const isLaunchTime = timeLeft.days === 0 && timeLeft.hours === 0 && timeLeft.minutes === 0 && timeLeft.seconds === 0
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center starfield overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background/80" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Stars Background - contained to this section only */}
+      <div className="absolute inset-0 z-0" style={{ background: 'linear-gradient(to bottom, #0B1026, #060813)' }}>
+        <div ref={starsContainerRef} className="stars-container absolute inset-0"></div>
+      </div>
+      
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background/80 z-10" />
 
-      <div className="relative z-10 container mx-auto px-4 text-center">
+      <div className="relative z-20 container mx-auto px-4 text-center">
         <div className="max-w-6xl mx-auto text-center">
           <div className="relative h-80 mb-12 flex items-center justify-center">
             {carouselSlides.map((slide, index) => (
@@ -162,7 +208,29 @@ export function HeroSection() {
         </div>
       </div>
 
-      <ChevronDown className="absolute bottom-8 left-1/2 transform -translate-x-1/2 h-8 w-8 text-primary" />
+      <ChevronDown className="absolute bottom-8 left-1/2 transform -translate-x-1/2 h-8 w-8 text-primary z-20" />
+      
+      {/* Add required CSS for star animation */}
+      <style jsx global>{`
+        .star {
+          position: absolute;
+          background: white;
+          border-radius: 50%;
+          animation: twinkle 3s infinite ease-in-out;
+          opacity: 0.7;
+        }
+        
+        @keyframes twinkle {
+          0%, 100% {
+            opacity: 0.3;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.2);
+          }
+        }
+      `}</style>
     </section>
   )
 }

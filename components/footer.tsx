@@ -6,7 +6,7 @@ export function Footer() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-3 mb-4">
-            <Rocket className="h-10 w-10 text-primary rocket-animation" />
+            <Rocket className="h-10 w-10 text-primary" />
             <span className="text-3xl font-bold">QSAT</span>
           </div>
           <p className="text-lg text-muted-foreground max-w-md mx-auto text-pretty">
