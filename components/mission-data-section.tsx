@@ -14,27 +14,57 @@ import {
   Area,
   Legend,
 } from "recharts"
+import { useEffect, useState } from "react"
+import Papa from "papaparse"
 
-const missionData = [
-  { time: "00:00", altitude: 0, temperature: 15, pressure: 1013, speed: 0 },
-  { time: "00:15", altitude: 5000, temperature: 8, pressure: 850, speed: 12 },
-  { time: "00:30", altitude: 15000, temperature: -5, pressure: 650, speed: 18 },
-  { time: "00:45", altitude: 30000, temperature: -25, pressure: 400, speed: 22 },
-  { time: "01:00", altitude: 50000, temperature: -45, pressure: 200, speed: 25 },
-  { time: "01:15", altitude: 70000, temperature: -55, pressure: 100, speed: 28 },
-  { time: "01:30", altitude: 85000, temperature: -60, pressure: 50, speed: 30 },
-  { time: "01:45", altitude: 95000, temperature: -65, pressure: 25, speed: 32 },
-  { time: "02:00", altitude: 105847, temperature: -70, pressure: 10, speed: 35 },
-  { time: "02:15", altitude: 102000, temperature: -68, pressure: 12, speed: 30 },
-  { time: "02:30", altitude: 95000, temperature: -62, pressure: 25, speed: 25 },
-  { time: "02:45", altitude: 80000, temperature: -55, pressure: 60, speed: 20 },
-  { time: "03:00", altitude: 60000, temperature: -40, pressure: 150, speed: 15 },
-  { time: "03:15", altitude: 35000, temperature: -20, pressure: 350, speed: 12 },
-  { time: "03:30", altitude: 15000, temperature: 0, pressure: 600, speed: 8 },
-  { time: "03:42", altitude: 0, temperature: 12, pressure: 1013, speed: 0 },
-]
+type MissionPoint = {
+  time: string
+  altitude: number
+  temperature: number
+  pressure: number
+  speed: number
+}
+
+function formatTime(seconds: number): string {
+  const h = Math.floor(seconds / 3600)
+  const m = Math.floor((seconds % 3600) / 60)
+  const s = seconds % 60
+  if (h > 0) {
+    return `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}:${s
+      .toString()
+      .padStart(2, "0")}`
+  }
+  return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`
+}
 
 export function MissionDataSection() {
+  const [missionData, setMissionData] = useState<MissionPoint[]>([])
+
+  useEffect(() => {
+    fetch("/weather_balloon_flight_log.csv")
+      .then((res) => res.text())
+      .then((csvText) => {
+        Papa.parse(csvText, {
+          header: true,
+          complete: (results) => {
+            const parsed = (results.data as any[])
+              .filter((row) => row.Elapsed_Time_s && row.Altitude_m)
+              .map((row: any) => {
+                const elapsed = parseInt(row.Elapsed_Time_s)
+                return {
+                  time: formatTime(elapsed),
+                  altitude: parseFloat(row.Altitude_m) * 3.28084,
+                  temperature: parseFloat(row.Temperature_C),
+                  pressure: parseFloat(row.Pressure_hPa),
+                  speed: parseFloat(row.Vertical_Velocity_mps),
+                }
+              })
+            setMissionData(parsed)
+          },
+        })
+      })
+  }, [])
+
   return (
     <section id="flight-details" className="py-20">
       <div className="container mx-auto px-4">
