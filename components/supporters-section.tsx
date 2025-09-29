@@ -5,24 +5,16 @@ import Image from "next/image"
 export function SupportersSection() {
   const partners = [
     {
-      name: "ISRO",
-      logo: "/partner-isro.jpg",
-      type: "Space Agency",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/institution_1-nMHSSJiFpy2NHZaB8Xv4OcZ7inHcDC.png",
     },
     {
-      name: "Educational Institution",
-      logo: "/partner-university.jpg",
-      type: "Academic Partner",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/institution_2-2JK90V5EYByBVObfJZF1Pg7BMRRnpG.png",
     },
     {
-      name: "Tech Sponsor",
-      logo: "/partner-tech-company.jpg",
-      type: "Technology Partner",
+      logo: "./images/rotary.png",
     },
     {
-      name: "Aerospace Corp",
-      logo: "/partner-aerospace.jpg",
-      type: "Industry Partner",
+      logo: "./images/RYLA-Logo-v2.png",
     },
   ]
 
@@ -41,19 +33,18 @@ export function SupportersSection() {
           {partners.map((partner, i) => (
             <Card
               key={i}
-              className="bg-card/30 backdrop-blur-sm border-primary/20 p-6 hover:border-primary/40 transition-all duration-300 group"
+              className="bg-white p-3 hover:bg-white transition-all duration-300 group"
             >
-              <div className="aspect-square relative overflow-hidden rounded-lg bg-background/50">
+              <div className="aspect-square relative overflow-hidden rounded-lg bg-white">
                 <Image
                   src={partner.logo || "/placeholder.svg"}
-                  alt={`${partner.name} logo`}
+                  // alt={`${partner.name} logo`}
                   fill
-                  className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
-                />
+                  className="object-contain p-4 group-hover:scale-105 transition-transform duration-300" alt={""}                />
               </div>
               <div className="text-center mt-4">
-                <p className="text-sm font-medium text-foreground">{partner.name}</p>
-                <p className="text-xs text-muted-foreground mt-1">{partner.type}</p>
+                {/* <p className="text-sm font-medium text-foreground">{partner.name}</p>
+                <p className="text-xs text-muted-foreground mt-1">{partner.type}</p> */}
               </div>
             </Card>
           ))}

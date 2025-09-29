@@ -52,8 +52,10 @@ export function Navigation() {
             <a href="#gallery" className="hover:text-primary transition-colors">
               Gallery
             </a>
-            <Button variant="outline" size="sm" className="cursor-pointer">
-              Recovery Site
+            <Button variant="outline" size="sm" className="cursor-pointer" asChild>
+              <a href="https://hab-rescue.vercel.app/" target="_blank" rel="noopener noreferrer">
+                Recovery Site
+              </a>
             </Button>
           </div>
 
