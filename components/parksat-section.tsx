@@ -43,7 +43,7 @@ export function ParkSatSection() {
           </div>
           <div>
             <img
-              src="/student-built-satellite-kit-with-electronics-and-s.jpg"
+              src="/QSAT.jpg"
               alt="ParkSat Kit"
               className="rounded-lg shadow-2xl float-animation"
             />

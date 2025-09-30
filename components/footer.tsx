@@ -1,4 +1,4 @@
-import { Rocket, Mail, Phone, MapPin } from "lucide-react"
+import { Rocket, Mail, Phone, MapPin, Twitter, Linkedin, Youtube, Instagram, Facebook } from "lucide-react"
 
 export function Footer() {
   return (
@@ -20,22 +20,37 @@ export function Footer() {
               <Mail className="h-5 w-5 text-primary" />
               <span>Contact Us</span>
             </h4>
-            <p className="text-muted-foreground">hello@qsat.diy</p>
+            <p className="text-muted-foreground">qsat.official@gmail.com</p>
           </div>
           <div className="text-center">
             <h4 className="font-semibold mb-3 flex items-center justify-center space-x-2">
               <Phone className="h-5 w-5 text-primary" />
               <span>Phone</span>
             </h4>
-            <p className="text-muted-foreground">+1 (555) 123-QSAT</p>
+            <p className="text-muted-foreground">+91 94870 65364</p>
           </div>
           <div className="text-center">
             <h4 className="font-semibold mb-3 flex items-center justify-center space-x-2">
               <MapPin className="h-5 w-5 text-primary" />
               <span>Location</span>
             </h4>
-            <p className="text-muted-foreground">Mission Control Center</p>
+            <p className="text-muted-foreground">Chennai | Coimbatore</p>
           </div>
+        </div>
+
+        <div className="flex justify-center gap-4 mb-8">
+          <a href="https://x.com/QsatEdu" className="p-3 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors" aria-label="Twitter">
+            <Twitter className="h-5 w-5" />
+          </a>
+          <a href="https://www.linkedin.com/company/qsat/" className="p-3 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors" aria-label="LinkedIn">
+            <Linkedin className="h-5 w-5" />
+          </a>
+          <a href="https://www.facebook.com/people/qsatdiy/61577273468189/?mibextid=qi2Omg&rdid=g4mljliRHGTupmCg&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1At8PWRsJp%2F%3Fmibextid%3Dqi2Omg" className="p-3 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors" aria-label="LinkedIn">
+            <Facebook className="h-5 w-5" />
+          </a>
+          <a href="https://www.instagram.com/qsat.diy/" className="p-3 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors" aria-label="Instagram">
+            <Instagram className="h-5 w-5" />
+          </a>
         </div>
 
         <div className="flex flex-wrap justify-center gap-6 mb-8 text-sm">
