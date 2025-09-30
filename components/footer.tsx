@@ -39,34 +39,34 @@ export function Footer() {
         </div>
 
         <div className="flex justify-center gap-4 mb-8">
-          <a href="https://x.com/QsatEdu" className="p-3 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors" aria-label="Twitter">
+          <a href="https://x.com/QsatEdu" className="p-3 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors" aria-label="Twitter" target="_blank">
             <Twitter className="h-5 w-5" />
           </a>
-          <a href="https://www.linkedin.com/company/qsat/" className="p-3 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/company/qsat/" className="p-3 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors" aria-label="LinkedIn" target="_blank ">
             <Linkedin className="h-5 w-5" />
           </a>
-          <a href="https://www.facebook.com/people/qsatdiy/61577273468189/?mibextid=qi2Omg&rdid=g4mljliRHGTupmCg&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1At8PWRsJp%2F%3Fmibextid%3Dqi2Omg" className="p-3 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors" aria-label="LinkedIn">
+          <a href="https://www.facebook.com/people/qsatdiy/61577273468189/?mibextid=qi2Omg&rdid=g4mljliRHGTupmCg&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1At8PWRsJp%2F%3Fmibextid%3Dqi2Omg" className="p-3 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors" aria-label="LinkedIn" target="_blank">
             <Facebook className="h-5 w-5" />
           </a>
-          <a href="https://www.instagram.com/qsat.diy/" className="p-3 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors" aria-label="Instagram">
+          <a href="https://www.instagram.com/qsat.diy/" className="p-3 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors" aria-label="Instagram" target="_blank">
             <Instagram className="h-5 w-5" />
           </a>
         </div>
 
         <div className="flex flex-wrap justify-center gap-6 mb-8 text-sm">
-          <a href="#" className="hover:text-primary transition-colors">
+          <a href="https://www.qsat.diy/about" className="hover:text-primary transition-colors" target="_blank">
             About QSAT
           </a>
-          <a href="#" className="hover:text-primary transition-colors">
+          <a href="https://www.qsat.diy/programs" className="hover:text-primary transition-colors" target="_blank">
             Educational Programs
           </a>
-          <a href="#" className="hover:text-primary transition-colors">
+          <a href="https://qsat-saas-new.vercel.app/flight-data-center" className="hover:text-primary transition-colors" target="_blank">
             Mission Reports
           </a>
-          <a href="#" className="hover:text-primary transition-colors">
+          <a href="https://www.qsat.diy/blog" className="hover:text-primary transition-colors" target="_blank">
             Student Resources
           </a>
-          <a href="#" className="hover:text-primary transition-colors">
+          <a href="https://www.qsat.diy/contact" className="hover:text-primary transition-colors" target="_blank">
             Contact Support
           </a>
         </div>

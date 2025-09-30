@@ -1,7 +1,20 @@
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Rocket, Star, Satellite, ExternalLink, Download, Thermometer } from "lucide-react"
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Rocket,
+  Star,
+  Satellite,
+  ExternalLink,
+  Download,
+  Thermometer,
+} from "lucide-react";
 import {
   LineChart,
   Line,
@@ -13,32 +26,32 @@ import {
   AreaChart,
   Area,
   Legend,
-} from "recharts"
-import { useEffect, useState } from "react"
-import Papa from "papaparse"
+} from "recharts";
+import { useEffect, useState } from "react";
+import Papa from "papaparse";
 
 type MissionPoint = {
-  time: string
-  altitude: number
-  temperature: number
-  pressure: number
-  speed: number
-}
+  time: string;
+  altitude: number;
+  temperature: number;
+  pressure: number;
+  speed: number;
+};
 
 function formatTime(seconds: number): string {
-  const h = Math.floor(seconds / 3600)
-  const m = Math.floor((seconds % 3600) / 60)
-  const s = seconds % 60
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = seconds % 60;
   if (h > 0) {
-    return `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}:${s
+    return `${h.toString().padStart(2, "0")}:${m
       .toString()
-      .padStart(2, "0")}`
+      .padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
   }
-  return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`
+  return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
 }
 
 export function MissionDataSection() {
-  const [missionData, setMissionData] = useState<MissionPoint[]>([])
+  const [missionData, setMissionData] = useState<MissionPoint[]>([]);
 
   useEffect(() => {
     fetch("/weather_balloon_flight_log.csv")
@@ -50,29 +63,34 @@ export function MissionDataSection() {
             const parsed = (results.data as any[])
               .filter((row) => row.Elapsed_Time_s && row.Altitude_m)
               .map((row: any) => {
-                const elapsed = parseInt(row.Elapsed_Time_s)
+                const elapsed = parseInt(row.Elapsed_Time_s);
                 return {
                   time: formatTime(elapsed),
                   altitude: parseFloat(row.Altitude_m) * 3.28084,
                   temperature: parseFloat(row.Temperature_C),
                   pressure: parseFloat(row.Pressure_hPa),
                   speed: parseFloat(row.Vertical_Velocity_mps),
-                }
-              })
-            setMissionData(parsed)
+                };
+              });
+            setMissionData(parsed);
           },
-        })
-      })
-  }, [])
+        });
+      });
+  }, []);
 
   return (
     <section id="flight-details" className="py-20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <Badge className="mb-4 bg-primary/20 text-primary border-primary/30">Mission Data</Badge>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">Flight Overview & Performance</h2>
+          <Badge className="mb-4 bg-primary/20 text-primary border-primary/30">
+            Mission Data
+          </Badge>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
+            Flight Overview & Performance
+          </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-            Comprehensive mission data and real-time telemetry from our high-altitude balloon flight
+            Comprehensive mission data and real-time telemetry from our
+            high-altitude balloon flight
           </p>
         </div>
 
@@ -85,8 +103,12 @@ export function MissionDataSection() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-primary mb-2">105,847 ft</div>
-              <p className="text-sm text-muted-foreground">Reached stratosphere successfully</p>
+              <div className="text-3xl font-bold text-primary mb-2">
+                105,847 ft
+              </div>
+              <p className="text-sm text-muted-foreground">
+                Reached stratosphere successfully
+              </p>
             </CardContent>
           </Card>
 
@@ -99,7 +121,9 @@ export function MissionDataSection() {
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold text-primary mb-2">3h 42m</div>
-              <p className="text-sm text-muted-foreground">From launch to recovery</p>
+              <p className="text-sm text-muted-foreground">
+                From launch to recovery
+              </p>
             </CardContent>
           </Card>
 
@@ -112,7 +136,9 @@ export function MissionDataSection() {
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold text-primary mb-2">2.4 GB</div>
-              <p className="text-sm text-muted-foreground">Scientific measurements</p>
+              <p className="text-sm text-muted-foreground">
+                Scientific measurements
+              </p>
             </CardContent>
           </Card>
         </div>
@@ -125,14 +151,28 @@ export function MissionDataSection() {
                 <Rocket className="h-5 w-5 text-primary" />
                 <span>Altitude & Speed Profile</span>
               </CardTitle>
-              <CardDescription>Flight altitude and speed over time</CardDescription>
+              <CardDescription>
+                Flight altitude and speed over time
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="h-96">
                 <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={missionData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#374151" opacity={0.3} />
-                    <XAxis dataKey="time" stroke="#9CA3AF" fontSize={12} tick={{ fill: "#9CA3AF" }} />
+                  <AreaChart
+                    data={missionData}
+                    margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                  >
+                    <CartesianGrid
+                      strokeDasharray="3 3"
+                      stroke="#374151"
+                      opacity={0.3}
+                    />
+                    <XAxis
+                      dataKey="time"
+                      stroke="#9CA3AF"
+                      fontSize={12}
+                      tick={{ fill: "#9CA3AF" }}
+                    />
                     <YAxis
                       yAxisId="altitude"
                       orientation="left"
@@ -201,14 +241,28 @@ export function MissionDataSection() {
                 <Thermometer className="h-5 w-5 text-primary" />
                 <span>Environmental Conditions</span>
               </CardTitle>
-              <CardDescription>Temperature and atmospheric pressure readings</CardDescription>
+              <CardDescription>
+                Temperature and atmospheric pressure readings
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="h-96">
                 <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={missionData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#374151" opacity={0.3} />
-                    <XAxis dataKey="time" stroke="#9CA3AF" fontSize={12} tick={{ fill: "#9CA3AF" }} />
+                  <LineChart
+                    data={missionData}
+                    margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                  >
+                    <CartesianGrid
+                      strokeDasharray="3 3"
+                      stroke="#374151"
+                      opacity={0.3}
+                    />
+                    <XAxis
+                      dataKey="time"
+                      stroke="#9CA3AF"
+                      fontSize={12}
+                      tick={{ fill: "#9CA3AF" }}
+                    />
                     <YAxis
                       yAxisId="temperature"
                       orientation="left"
@@ -273,17 +327,23 @@ export function MissionDataSection() {
         <Card className="bg-card/50 backdrop-blur-sm border-primary/20 mb-8">
           <CardHeader>
             <CardTitle>Mission Data Summary</CardTitle>
-            <CardDescription>Key telemetry points and measurements from the flight</CardDescription>
+            <CardDescription>
+              Key telemetry points and measurements from the flight
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
               <div className="text-center p-4 bg-secondary/30 rounded-lg">
                 <div className="text-2xl font-bold text-primary">-70°C</div>
-                <div className="text-sm text-muted-foreground">Min Temperature</div>
+                <div className="text-sm text-muted-foreground">
+                  Min Temperature
+                </div>
               </div>
               <div className="text-center p-4 bg-secondary/30 rounded-lg">
                 <div className="text-2xl font-bold text-primary">10 hPa</div>
-                <div className="text-sm text-muted-foreground">Min Pressure</div>
+                <div className="text-sm text-muted-foreground">
+                  Min Pressure
+                </div>
               </div>
               <div className="text-center p-4 bg-secondary/30 rounded-lg">
                 <div className="text-2xl font-bold text-primary">35 m/s</div>
@@ -295,22 +355,43 @@ export function MissionDataSection() {
               </div>
             </div>
             <div className="flex flex-wrap gap-4">
-              <Button variant="outline" className="flex items-center space-x-2 bg-transparent">
+              <Button
+                variant="outline"
+                className="flex items-center space-x-2 bg-transparent"
+              >
                 <ExternalLink className="h-4 w-4" />
-                <span>View Full Report</span>
+                <a href="/report" target="_blank">View Full Report</a>
               </Button>
-              <Button variant="outline" className="flex items-center space-x-2 bg-transparent">
+              <Button
+                variant="outline"
+                className="flex items-center space-x-2 bg-transparent"
+              >
                 <Download className="h-4 w-4" />
-                <span>Download CSV Data</span>
+                <a
+                  href="/images/weather_balloon_flight_log.csv"
+                  download="weather_balloon_flight_log.csv"
+                >
+                  Download CSV Data
+                </a>
               </Button>
-              <Button variant="outline" className="flex items-center space-x-2 bg-transparent">
+
+              <Button
+                variant="outline"
+                className="flex items-center space-x-2 bg-transparent"
+              >
                 <Download className="h-4 w-4" />
-                <span>Download PDF Report</span>
+                <a
+                  href="/images/mission-report.pdf"
+                  download="qsat-mission-report.pdf"
+                >
+                  Download PDF Report
+                </a>
               </Button>
             </div>
           </CardContent>
         </Card>
       </div>
     </section>
-  )
+  );
 }
+  

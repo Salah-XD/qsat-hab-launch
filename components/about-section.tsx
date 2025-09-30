@@ -14,7 +14,7 @@ export function AboutSection() {
             />
           </div>
           <div>
-            <Badge className="mb-4 bg-primary/20 text-primary border-primary/30">About the Mission</Badge>
+            <Badge className="mb-4 bg-primary/20 text-primary border-primary/30">About the Event</Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-balance">
               QSAT HAB EVENT
             </h2>
@@ -24,7 +24,7 @@ export function AboutSection() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
               <div className="flex items-center space-x-2">
                 <Calendar className="h-5 w-5 text-primary" />
-                <span>October 15th, 2024</span>
+                <span>October 15th, 2025</span>
               </div>
               <div className="flex items-center space-x-2">
                 <MapPin className="h-5 w-5 text-primary" />

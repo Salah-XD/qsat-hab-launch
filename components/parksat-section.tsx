@@ -39,7 +39,7 @@ export function ParkSatSection() {
                 </div>
               </div>
             </div>
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">Learn More About ParkSat</Button>
+            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground"><a href="/report#parksat">Learn More About PARKSAT</a></Button>
           </div>
           <div>
             <img

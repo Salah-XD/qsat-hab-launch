@@ -21,6 +21,37 @@ export function AboutQSATSection() {
           <Card className="bg-card/50 backdrop-blur-sm border-primary/20">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
+                <Star className="h-6 w-6 text-primary" />
+                <span>QSAT</span>
+              </CardTitle>
+              <CardDescription>Comprehensive aerospace education platform</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="mb-4">
+                <img
+                  src="/qsat-learning-hub-preview.jpg"
+                  alt="QSAT Learning Hub Platform"
+                  className="w-full h-32 object-cover rounded-lg"
+                />
+              </div>
+              <p className="text-muted-foreground mb-4">
+                Access courses, tutorials, and interactive content covering satellite technology, space science, and
+                engineering.
+              </p>
+              <Button
+                variant="outline"
+                className="w-full bg-transparent"
+                onClick={() => window.open("https://www.qsat.diy", "_blank")}
+              >
+                <ExternalLink className="mr-2 h-4 w-4" />
+                Start Learning
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-card/50 backdrop-blur-sm border-primary/20">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
                 <Satellite className="h-6 w-6 text-primary" />
                 <span>QSAT E-Commerce</span>
               </CardTitle>
@@ -45,37 +76,6 @@ export function AboutQSATSection() {
               >
                 <ExternalLink className="mr-2 h-4 w-4" />
                 Visit Store
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-card/50 backdrop-blur-sm border-primary/20">
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <Star className="h-6 w-6 text-primary" />
-                <span>QSAT Learning Hub</span>
-              </CardTitle>
-              <CardDescription>Comprehensive aerospace education platform</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="mb-4">
-                <img
-                  src="/qsat-learning-hub-preview.jpg"
-                  alt="QSAT Learning Hub Platform"
-                  className="w-full h-32 object-cover rounded-lg"
-                />
-              </div>
-              <p className="text-muted-foreground mb-4">
-                Access courses, tutorials, and interactive content covering satellite technology, space science, and
-                engineering.
-              </p>
-              <Button
-                variant="outline"
-                className="w-full bg-transparent"
-                onClick={() => window.open("https://www.qsat.diy", "_blank")}
-              >
-                <ExternalLink className="mr-2 h-4 w-4" />
-                Start Learning
               </Button>
             </CardContent>
           </Card>
