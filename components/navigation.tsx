@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Rocket, Menu, X } from "lucide-react"
+import Image from "next/image"
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -31,8 +32,7 @@ export function Navigation() {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Rocket className="h-8 w-8 text-primary" />
-            <span className="text-2xl font-bold">QSAT</span>
+            <Image src="/QSAT_white_png.png" alt="QSAT Logo" width={200} height={200} />
           </div>
 
           {/* Desktop Menu */}
