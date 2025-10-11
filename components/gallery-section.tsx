@@ -71,7 +71,7 @@ export function GallerySection() {
         </div>
 
         <div className="text-center">
-          <Button variant="outline" size="lg" className="hover:bg-primary/10 bg-transparent">
+          <Button variant="outline" size="lg" className="hover:bg-primary bg-transparent">
             View Complete Gallery
           </Button>
         </div>
