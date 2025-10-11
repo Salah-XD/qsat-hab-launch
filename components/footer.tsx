@@ -7,7 +7,7 @@ export function Footer() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-3 mb-4">
-            <Image src="/QSAT_white_png.png" alt="QSAT Logo" width={200} height={200} />
+            <Image src="/QSAT_white_png.png" alt="QSAT Logo" width={150} height={150} />
           </div>
           <p className="text-lg text-muted-foreground max-w-md mx-auto text-pretty">
             Inspiring the next generation of space explorers through hands-on education and innovation

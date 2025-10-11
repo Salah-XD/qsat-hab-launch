@@ -79,7 +79,7 @@ export function RegistrationSection() {
                   </SelectContent>
                 </Select>
               </div>
-              <Button variant="outline" className="w-full bg-transparent">
+              <Button variant="outline" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
                 Submit Feedback
               </Button>
             </CardContent>

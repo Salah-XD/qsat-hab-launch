@@ -84,7 +84,7 @@ export function AboutQSATSection() {
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
                 <Zap className="h-6 w-6 text-primary" />
-                <span>QSAT SAAS</span>
+                <span>QSAT SaaS</span>
               </CardTitle>
               <CardDescription>Advanced satellite management platform</CardDescription>
             </CardHeader>

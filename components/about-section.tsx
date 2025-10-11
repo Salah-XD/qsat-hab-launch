@@ -19,12 +19,12 @@ export function AboutSection() {
               QSAT HAB EVENT
             </h2>
             <p className="text-lg text-muted-foreground mb-6 text-pretty">
-              The QSAT HAB mission propels student-designed payloads and cutting-edge sensors to the edge of space, surpassing 100,000 feet. Along the way, it gathers crucial atmospheric data and demonstrates the power of hands-on aerospace innovation. This near-space journey offers students a chance to explore, experiment, and push the boundaries of science.
+              The QSAT HAB mission sends student-made payloads and modern sensors to the edge of space, going higher than 3280 feet. Along the way, it collects important data about the atmosphere and shows the value of hands-on learning in aerospace. This near-space journey gives students a chance to explore, try new things, and learn more about science.
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
               <div className="flex items-center space-x-2">
                 <Calendar className="h-5 w-5 text-primary" />
-                <span>October 15th, 2025</span>
+                <span>October 30th, 2025</span>
               </div>
               <div className="flex items-center space-x-2">
                 <MapPin className="h-5 w-5 text-primary" />

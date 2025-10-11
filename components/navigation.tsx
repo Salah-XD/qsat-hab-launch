@@ -32,7 +32,7 @@ export function Navigation() {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Image src="/QSAT_white_png.png" alt="QSAT Logo" width={200} height={200} />
+            <Image src="/QSAT_white_png.png" alt="QSAT Logo" width={150} height={150} />
           </div>
 
           {/* Desktop Menu */}

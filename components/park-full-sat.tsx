@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 
 export function ParkFullSatSection() {
   return (
@@ -39,11 +40,13 @@ export function ParkFullSatSection() {
                 </div>
               </div>
             </div>
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground"><a href="/report#parksat">Learn More About PARKSAT</a></Button>
+            {/* <Button className="bg-primary hover:bg-primary/90 text-primary-foreground"><a href="/report#parksat">Learn More About PARKSAT</a></Button> */}
           </div>
           <div>
-            <img
-              src="/QSAT.jpg"
+            <Image
+              width={700}
+              height={300}
+              src="/QSAT_OPEN.jpg"
               alt="ParkSat Kit"
               className="rounded-lg shadow-2xl float-animation"
             />

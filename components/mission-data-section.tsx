@@ -52,6 +52,18 @@ function formatTime(seconds: number): string {
 
 export function MissionDataSection() {
   const [missionData, setMissionData] = useState<MissionPoint[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     fetch("/weather_balloon_flight_log.csv")
@@ -86,7 +98,7 @@ export function MissionDataSection() {
             Mission Data
           </Badge>
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
-            Flight Overview & Performance
+            Mission Overview & Performance
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
             Comprehensive mission data and real-time telemetry from our
@@ -156,11 +168,11 @@ export function MissionDataSection() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="h-96">
+              <div className="h-[450px] md:h-96">
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart
                     data={missionData}
-                    margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                    margin={{ top: 20, right: isMobile ? 10 : 30, left: isMobile ? 0 : 20, bottom: 20 }}
                   >
                     <CartesianGrid
                       strokeDasharray="3 3"
@@ -179,12 +191,12 @@ export function MissionDataSection() {
                       stroke="#F97316"
                       fontSize={12}
                       tick={{ fill: "#F97316" }}
-                      label={{
+                      label={!isMobile ? {
                         value: "Altitude (ft)",
                         angle: -90,
                         position: "insideLeft",
                         style: { textAnchor: "middle", fill: "#F97316" },
-                      }}
+                      } : undefined}
                     />
                     <YAxis
                       yAxisId="speed"
@@ -192,12 +204,12 @@ export function MissionDataSection() {
                       stroke="#3B82F6"
                       fontSize={12}
                       tick={{ fill: "#3B82F6" }}
-                      label={{
+                      label={!isMobile ? {
                         value: "Speed (m/s)",
                         angle: 90,
                         position: "insideRight",
                         style: { textAnchor: "middle", fill: "#3B82F6" },
-                      }}
+                      } : undefined}
                     />
                     <Tooltip
                       contentStyle={{
@@ -246,11 +258,11 @@ export function MissionDataSection() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="h-96">
+              <div className="h-[450px] md:h-96">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart
                     data={missionData}
-                    margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                    margin={{ top: 20, right: isMobile ? 10 : 30, left: isMobile ? 0 : 20, bottom: 20 }}
                   >
                     <CartesianGrid
                       strokeDasharray="3 3"
@@ -269,12 +281,12 @@ export function MissionDataSection() {
                       stroke="#EF4444"
                       fontSize={12}
                       tick={{ fill: "#EF4444" }}
-                      label={{
+                      label={!isMobile ? {
                         value: "Temperature (°C)",
                         angle: -90,
                         position: "insideLeft",
                         style: { textAnchor: "middle", fill: "#EF4444" },
-                      }}
+                      } : undefined}
                     />
                     <YAxis
                       yAxisId="pressure"
@@ -282,12 +294,12 @@ export function MissionDataSection() {
                       stroke="#10B981"
                       fontSize={12}
                       tick={{ fill: "#10B981" }}
-                      label={{
+                      label={!isMobile ? {
                         value: "Pressure (hPa)",
                         angle: 90,
                         position: "insideRight",
                         style: { textAnchor: "middle", fill: "#10B981" },
-                      }}
+                      } : undefined}
                     />
                     <Tooltip
                       contentStyle={{
@@ -394,4 +406,3 @@ export function MissionDataSection() {
     </section>
   );
 }
-  

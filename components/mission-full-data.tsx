@@ -355,13 +355,13 @@ export function MissionDataFullSection() {
               </div>
             </div>
             <div className="flex flex-wrap gap-4">
-              <Button
+              {/* <Button
                 variant="outline"
                 className="flex items-center space-x-2 bg-transparent"
               >
                 <ExternalLink className="h-4 w-4" />
                 <a href="/report" target="_blank">View Full Report</a>
-              </Button>
+              </Button> */}
               <Button
                 variant="outline"
                 className="flex items-center space-x-2 bg-transparent"

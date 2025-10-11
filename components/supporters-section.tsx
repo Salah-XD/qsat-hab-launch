@@ -25,7 +25,7 @@ export function SupportersSection() {
           <Badge className="mb-4 bg-primary/20 text-primary border-primary/30">Our Partners</Badge>
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">Supported by Industry Leaders</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-            With legal permissions and backing from educational institutions and aerospace companies
+            With legal permissions and backing from educational institutions
           </p>
         </div>
 
