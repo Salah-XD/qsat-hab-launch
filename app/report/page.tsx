@@ -1,14 +1,14 @@
 "use client"
 import { MissionDataSection} from "@/components/mission-data-section";
 import { Navigation } from "@/components/navigation";
-import { ParkSatSection } from "@/components/parksat-section";
-
+import { ParkFullSatSection } from "@/components/park-full-sat";
+import { MissionDataFullSection } from "@/components/mission-full-data";
 export default function ReportPage() {
   return (
     <div >
       <Navigation />
-      <MissionDataSection />
-      <ParkSatSection />
+      <MissionDataFullSection />
+      <ParkFullSatSection />
     </div>
   );
 }

@@ -63,7 +63,7 @@ export function HeroSection() {
 
   // Countdown to October 15th, 2025
   useEffect(() => {
-    const targetDate = new Date("2025-10-15T00:00:00").getTime()
+    const targetDate = new Date("2025-10-30T00:00:00").getTime()
 
     const timer = setInterval(() => {
       const now = new Date().getTime()
