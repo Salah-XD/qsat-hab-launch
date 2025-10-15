@@ -6,32 +6,32 @@ import Image from "next/image"
 export function GallerySection() {
   const galleryImages = [
     {
-      src: "/qsat-cubesat-assembly.jpg",
+      src: "./qsat_pcet.png",
       alt: "Students assembling CubeSat components",
       title: "CubeSat Assembly Workshop",
     },
     {
-      src: "/qsat-balloon-preparation.jpg",
+      src: "",
       alt: "HAB payload preparation",
       title: "HAB Payload Preparation",
     },
     {
-      src: "/qsat-launch-day.jpg",
+      src: "",
       alt: "Launch day team photo",
       title: "Launch Day Team",
     },
     {
-      src: "/qsat-data-analysis.jpg",
+      src: "",
       alt: "Students analyzing flight data",
       title: "Data Analysis Session",
     },
     {
-      src: "/qsat-recovery-mission.jpg",
+      src: "",
       alt: "Payload recovery in field",
       title: "Payload Recovery",
     },
     {
-      src: "/qsat-student-presentation.jpg",
+      src: "",
       alt: "Students presenting results",
       title: "Results Presentation",
     },
