@@ -17,23 +17,8 @@ export function GallerySection() {
     },
     {
       src: "",
-      alt: "Launch day team photo",
-      title: "Launch Day Team",
-    },
-    {
-      src: "",
-      alt: "Students analyzing flight data",
-      title: "Data Analysis Session",
-    },
-    {
-      src: "",
-      alt: "Payload recovery in field",
-      title: "Payload Recovery",
-    },
-    {
-      src: "",
-      alt: "Students presenting results",
-      title: "Results Presentation",
+      alt: "HAB payload preparation",
+      title: "ISRO Collaboration",
     },
   ]
 
@@ -70,11 +55,11 @@ export function GallerySection() {
           ))}
         </div>
 
-        <div className="text-center">
+        {/* <div className="text-center">
           <Button variant="outline" size="lg" className="hover:bg-primary bg-transparent">
             View Complete Gallery
           </Button>
-        </div>
+        </div> */}
       </div>
     </section>
   )

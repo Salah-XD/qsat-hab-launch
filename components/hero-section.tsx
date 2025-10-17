@@ -21,6 +21,7 @@ export function HeroSection() {
     seconds: 0,
   })
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [youtubeUrl, setYoutubeUrl] = useState("https://www.youtube.com/watch?v=jfKfPfyJRdk")
   const starsContainerRef = useRef<HTMLDivElement>(null)
 
   // Create stars for hero section only
@@ -61,9 +62,9 @@ export function HeroSection() {
     }
   }, [])
 
-  // Countdown to October 15th, 2025
+  // Countdown to October 30th, 2025
   useEffect(() => {
-    const targetDate = new Date("2025-10-30T00:00:00").getTime()
+    const targetDate = new Date("2025-10-17T11:59:40").getTime()
 
     const timer = setInterval(() => {
       const now = new Date().getTime()
@@ -108,6 +109,21 @@ export function HeroSection() {
 
   const isLaunchTime = timeLeft.days === 0 && timeLeft.hours === 0 && timeLeft.minutes === 0 && timeLeft.seconds === 0
 
+  // Extract YouTube video ID from URL
+  const getYouTubeEmbedUrl = (url: string) => {
+    if (!url) return ""
+    
+    // Handle different YouTube URL formats
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/
+    const match = url.match(regExp)
+    
+    if (match && match[2].length === 11) {
+      return `https://www.youtube.com/embed/${match[2]}?autoplay=1&rel=0&modestbranding=1&controls=1`
+    }
+    
+    return ""
+  }
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Stars Background - contained to this section only */}
@@ -120,25 +136,33 @@ export function HeroSection() {
 
       <div className="relative z-20 container mx-auto px-4 text-center">
         <div className="max-w-6xl mx-auto text-center">
-          <div className="relative h-80 mb-12 flex items-center justify-center">
-            {carouselSlides.map((slide, index) => (
-              <div
-                key={index}
-                className={`absolute inset-0 transition-opacity duration-1000 flex flex-col items-center justify-center ${
-                  index === currentSlide ? "opacity-100" : "opacity-0"
-                }`}
-              >
-                <h1 className="text-4xl md:text-7xl font-bold mb-6 text-balance leading-tight">{slide.title}</h1>
-                <p className="text-xl md:text-2xl text-primary mb-6 font-semibold">{slide.subtitle}</p>
-                <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty leading-relaxed">
-                  {slide.description}
-                </p>
-              </div>
-            ))}
+          {/* Carousel - Hidden when launch time */}
+          <div
+            className={`transition-all duration-1000 ease-in-out ${
+              isLaunchTime ? "opacity-0 scale-95 h-0 overflow-hidden" : "opacity-100 scale-100"
+            }`}
+          >
+            <div className="relative h-80 mb-12 flex items-center justify-center">
+              {carouselSlides.map((slide, index) => (
+                <div
+                  key={index}
+                  className={`absolute inset-0 transition-opacity duration-1000 flex flex-col items-center justify-center ${
+                    index === currentSlide ? "opacity-100" : "opacity-0"
+                  }`}
+                >
+                  <h1 className="text-4xl md:text-7xl font-bold mb-6 text-balance leading-tight">{slide.title}</h1>
+                  <p className="text-xl md:text-2xl text-primary mb-6 font-semibold">{slide.subtitle}</p>
+                  <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty leading-relaxed">
+                    {slide.description}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
 
+          {/* Countdown Timer */}
           <div
-            className={`transition-all duration-1000 ease-in-out ${isLaunchTime ? "opacity-0 scale-95 pointer-events-none" : "opacity-100 scale-100"}`}
+            className={`transition-all duration-1000 ease-in-out ${isLaunchTime ? "opacity-0 scale-95 pointer-events-none h-0 overflow-hidden" : "opacity-100 scale-100"}`}
           >
             <div className="grid grid-cols-4 gap-4 max-w-lg mx-auto mb-12">
               {[
@@ -170,6 +194,7 @@ export function HeroSection() {
             </Button>
           </div>
 
+          {/* Live Stream Section */}
           <div
             className={`transition-all duration-1000 ease-in-out ${
               isLaunchTime
@@ -177,30 +202,52 @@ export function HeroSection() {
                 : "opacity-0 scale-95 translate-y-8 pointer-events-none absolute"
             }`}
           >
-            <div className="bg-card/80 backdrop-blur-sm rounded-lg p-8 border border-primary/30 max-w-5xl mx-auto shadow-2xl">
-              <div className="flex items-center justify-center mb-6">
-                <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse mr-3"></div>
-                <h3 className="text-3xl font-bold text-primary animate-pulse">🚀 LIVE NOW!</h3>
+            <div className="bg-card/80 backdrop-blur-sm rounded-lg p-4 sm:p-6 md:p-8 border border-primary/30 w-full max-w-7xl mx-auto shadow-2xl">
+              <div className="flex items-center justify-center mb-4 sm:mb-6">
+                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full animate-pulse mr-2 sm:mr-3"></div>
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-primary animate-pulse">🚀 LIVE NOW!</h3>
               </div>
-              <div className="aspect-video bg-secondary rounded-lg flex items-center justify-center min-h-[500px] border-2 border-primary/20 shadow-inner">
-                <div className="text-center transform transition-all hover:scale-105">
-                  <div className="relative">
-                    <Play className="h-24 w-24 text-primary mx-auto mb-6 animate-pulse" />
-                    <div className="absolute inset-0 bg-primary/20 rounded-full animate-ping"></div>
-                  </div>
-                  <p className="text-2xl font-semibold mb-2">Live Mission Stream</p>
-                  <p className="text-muted-foreground text-lg">Broadcasting from the stratosphere</p>
-                  <div className="mt-4 flex justify-center space-x-2">
-                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
-                    <div
-                      className="w-2 h-2 bg-primary rounded-full animate-bounce"
-                      style={{ animationDelay: "0.1s" }}
-                    ></div>
-                    <div
-                      className="w-2 h-2 bg-primary rounded-full animate-bounce"
-                      style={{ animationDelay: "0.2s" }}
-                    ></div>
-                  </div>
+              
+              {/* YouTube URL Input - Hidden from view */}
+              <input
+                type="hidden"
+                value={youtubeUrl}
+                onChange={(e) => setYoutubeUrl(e.target.value)}
+              />
+
+              <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                <div className="absolute inset-0 bg-secondary rounded-lg border-2 border-primary/20 shadow-inner overflow-hidden">
+                  {youtubeUrl && getYouTubeEmbedUrl(youtubeUrl) ? (
+                    <iframe
+                      className="absolute top-0 left-0 w-full h-full"
+                      src={getYouTubeEmbedUrl(youtubeUrl)}
+                      title="YouTube Live Stream"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-center transform transition-all hover:scale-105 p-4">
+                        <div className="relative inline-block">
+                          <Play className="h-12 w-12 sm:h-16 sm:w-16 md:h-24 md:w-24 text-primary mx-auto mb-4 sm:mb-6 animate-pulse" />
+                          <div className="absolute inset-0 bg-primary/20 rounded-full animate-ping"></div>
+                        </div>
+                        <p className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">Live Mission Stream</p>
+                        <p className="text-muted-foreground text-sm sm:text-base md:text-lg">Connecting to live stream...</p>
+                        <div className="mt-4 flex justify-center space-x-2">
+                          <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
+                          <div
+                            className="w-2 h-2 bg-primary rounded-full animate-bounce"
+                            style={{ animationDelay: "0.1s" }}
+                          ></div>
+                          <div
+                            className="w-2 h-2 bg-primary rounded-full animate-bounce"
+                            style={{ animationDelay: "0.2s" }}
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
