@@ -8,7 +8,7 @@ export function AboutSection() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
             <img
-              src="/high-altitude-balloon-launch-with-students.jpg"
+              src="/high-altitude-balloon-launch-with-students.webp"
               alt="QSAT HAB Launch"
               className="rounded-lg shadow-2xl"
             />

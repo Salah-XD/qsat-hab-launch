@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Play, ChevronDown } from "lucide-react"
 
-
 interface TimeLeft {
   days: number
   hours: number
@@ -21,8 +20,11 @@ export function HeroSection() {
     seconds: 0,
   })
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [youtubeUrl, setYoutubeUrl] = useState("https://www.youtube.com/watch?v=jfKfPfyJRdk")
   const starsContainerRef = useRef<HTMLDivElement>(null)
+
+  // YouTube video ID extracted from your URL
+  const youtubeVideoId = "PfIpHQ1px_E"
+  const youtubeEmbedUrl = `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&rel=0&modestbranding=1&controls=1`
 
   // Create stars for hero section only
   useEffect(() => {
@@ -62,7 +64,7 @@ export function HeroSection() {
     }
   }, [])
 
-  // Countdown to October 30th, 2025
+  // Countdown to October 21st, 2025 23:47:00
   useEffect(() => {
     const targetDate = new Date("2025-10-30T11:11:11").getTime()
 
@@ -96,7 +98,7 @@ export function HeroSection() {
 
   const carouselSlides = [
     {
-      title: "QSAT HAB Launch Program",
+      title: "Satellite Launch Program",
       subtitle: "High Altitude Balloon Mission",
       description: "Join us for an extraordinary journey to the edge of space with our student-built satellite payload",
     },
@@ -108,21 +110,6 @@ export function HeroSection() {
   ]
 
   const isLaunchTime = timeLeft.days === 0 && timeLeft.hours === 0 && timeLeft.minutes === 0 && timeLeft.seconds === 0
-
-  // Extract YouTube video ID from URL
-  const getYouTubeEmbedUrl = (url: string) => {
-    if (!url) return ""
-    
-    // Handle different YouTube URL formats
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/
-    const match = url.match(regExp)
-    
-    if (match && match[2].length === 11) {
-      return `https://www.youtube.com/embed/${match[2]}?autoplay=1&rel=0&modestbranding=1&controls=1`
-    }
-    
-    return ""
-  }
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -207,55 +194,33 @@ export function HeroSection() {
                 <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full animate-pulse mr-2 sm:mr-3"></div>
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-primary animate-pulse">🚀 LIVE NOW!</h3>
               </div>
-              
-              {/* YouTube URL Input - Hidden from view */}
-              <input
-                type="hidden"
-                value={youtubeUrl}
-                onChange={(e) => setYoutubeUrl(e.target.value)}
-              />
 
               <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                 <div className="absolute inset-0 bg-secondary rounded-lg border-2 border-primary/20 shadow-inner overflow-hidden">
-                  {youtubeUrl && getYouTubeEmbedUrl(youtubeUrl) ? (
-                    <iframe
-                      className="absolute top-0 left-0 w-full h-full"
-                      src={getYouTubeEmbedUrl(youtubeUrl)}
-                      title="YouTube Live Stream"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center transform transition-all hover:scale-105 p-4">
-                        <div className="relative inline-block">
-                          <Play className="h-12 w-12 sm:h-16 sm:w-16 md:h-24 md:w-24 text-primary mx-auto mb-4 sm:mb-6 animate-pulse" />
-                          <div className="absolute inset-0 bg-primary/20 rounded-full animate-ping"></div>
-                        </div>
-                        <p className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">Live Mission Stream</p>
-                        <p className="text-muted-foreground text-sm sm:text-base md:text-lg">Connecting to live stream...</p>
-                        <div className="mt-4 flex justify-center space-x-2">
-                          <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
-                          <div
-                            className="w-2 h-2 bg-primary rounded-full animate-bounce"
-                            style={{ animationDelay: "0.1s" }}
-                          ></div>
-                          <div
-                            className="w-2 h-2 bg-primary rounded-full animate-bounce"
-                            style={{ animationDelay: "0.2s" }}
-                          ></div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
+                  <iframe
+                    className="absolute top-0 left-0 w-full h-full"
+                    src={youtubeEmbedUrl}
+                    title="QSAT HAB Launch Live Stream"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
                 </div>
+              </div>
+              
+              <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                  <span className="text-xs sm:text-sm text-muted-foreground">Mission Active</span>
+                </div>
+                <div className="hidden sm:block w-1 h-1 bg-muted-foreground/30 rounded-full"></div>
+                <span className="text-xs sm:text-sm text-muted-foreground">Tracking in Real-time</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <ChevronDown className="absolute bottom-8 left-1/2 transform -translate-x-1/2 h-8 w-8 text-primary z-20" />
+      <ChevronDown className="absolute bottom-8 left-1/2 transform -translate-x-1/2 h-8 w-8 text-primary z-20 animate-bounce" />
       
       {/* Add required CSS for star animation */}
       <style jsx global>{`

@@ -20,7 +20,7 @@ export function Footer() {
               <Mail className="h-5 w-5 text-primary" />
               <span>Contact Us</span>
             </h4>
-            <p className="text-muted-foreground">qsat.official@gmail.com</p>
+            <p className="text-muted-foreground">enquire@qsat.diy</p>
           </div>
           <div className="text-center">
             <h4 className="font-semibold mb-3 flex items-center justify-center space-x-2">

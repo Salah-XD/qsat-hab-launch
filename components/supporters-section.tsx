@@ -4,12 +4,12 @@ import Image from "next/image"
 
 export function SupportersSection() {
   const partners = [
-    {
-      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/institution_1-nMHSSJiFpy2NHZaB8Xv4OcZ7inHcDC.png",
-    },
-    {
-      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/institution_2-2JK90V5EYByBVObfJZF1Pg7BMRRnpG.png",
-    },
+    // {
+    //   logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/institution_1-nMHSSJiFpy2NHZaB8Xv4OcZ7inHcDC.png",
+    // },
+    // {
+    //   logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/institution_2-2JK90V5EYByBVObfJZF1Pg7BMRRnpG.png",
+    // },
     {
       logo: "./images/rotary.png",
     },
@@ -54,10 +54,10 @@ export function SupportersSection() {
           <div className="bg-card/20 backdrop-blur-sm border border-primary/20 rounded-lg p-6 max-w-4xl mx-auto">
             <h3 className="text-lg font-semibold mb-4 text-primary">Legal Compliance & Permissions</h3>
             <div className="grid md:grid-cols-3 gap-4 text-sm text-muted-foreground">
-              <div>
+              {/* <div>
                 <p className="font-medium text-foreground mb-2">Aviation Authority</p>
                 <p>All flights conducted under proper aviation regulations and permissions</p>
-              </div>
+              </div> */}
               <div>
                 <p className="font-medium text-foreground mb-2">Educational License</p>
                 <p>Approved educational research project with institutional backing</p>

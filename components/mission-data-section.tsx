@@ -344,7 +344,7 @@ export function MissionDataSection() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
               <div className="text-center p-4 bg-secondary/30 rounded-lg">
                 <div className="text-2xl font-bold text-primary">-70°C</div>
                 <div className="text-sm text-muted-foreground">
