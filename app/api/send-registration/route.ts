@@ -1,133 +1,143 @@
-import { Resend } from 'resend';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server"
+import { Resend } from "resend"
 
-const resend = new Resend('re_aFGL7xtw_6hH9jovhPHQnFxaKt1AEzXL6');
+const resend = new Resend("re_aFGL7xtw_6hH9jovhPHQnFxaKt1AEzXL6")
 
-export async function POST(request: Request) {
+export async function POST(req: NextRequest) {
+  console.log('=== Registration API Called ===')
+  
   try {
-    const { fullName, email, participationStatus } = await request.json();
+    const body = await req.json()
+    console.log('Request body received:', { fullName: body.fullName, email: body.email, participationStatus: body.participationStatus })
+    
+    const { fullName, email, participationStatus } = body
 
-    const data = await resend.emails.send({
-      from: 'QSAT Registration <onboarding@resend.dev>',
-      to: ['qsattech@gmail.com'],
-      subject: '🚀 New QSAT Registration',
+    // Validate input
+    if (!fullName || !email || !participationStatus) {
+      console.log('Validation failed: Missing fields')
+      return NextResponse.json(
+        { message: "All fields are required" },
+        { status: 400 }
+      )
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      console.log('Validation failed: Invalid email format')
+      return NextResponse.json(
+        { message: "Invalid email address" },
+        { status: 400 }
+      )
+    }
+
+    console.log('Sending confirmation email to user...')
+    // Send email to user (confirmation)
+    const userEmailResult = await resend.emails.send({
+      from: "QSAT Mission <onboarding@resend.dev>",
+      to: email,
+      subject: "Welcome to the QSAT Mission! 🚀",
       html: `
         <!DOCTYPE html>
         <html>
           <head>
             <style>
-              body { 
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                line-height: 1.6; 
-                color: #333;
-                margin: 0;
-                padding: 0;
-                background-color: #f4f4f4;
-              }
-              .container { 
-                max-width: 600px; 
-                margin: 20px auto; 
-                background: white;
-                border-radius: 12px;
-                overflow: hidden;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-              }
-              .header { 
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                color: white; 
-                padding: 30px 20px;
-                text-align: center;
-              }
-              .header h2 {
-                margin: 0;
-                font-size: 24px;
-              }
-              .content { 
-                padding: 30px;
-              }
-              .intro {
-                font-size: 16px;
-                color: #555;
-                margin-bottom: 25px;
-              }
-              .field { 
-                margin-bottom: 20px;
-                border-left: 4px solid #667eea;
-                padding-left: 15px;
-              }
-              .label { 
-                font-weight: bold;
-                color: #667eea;
-                font-size: 14px;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-              }
-              .value { 
-                margin-top: 8px;
-                font-size: 16px;
-                color: #333;
-              }
-              .footer {
-                background: #f9f9f9;
-                padding: 20px;
-                text-align: center;
-                color: #777;
-                font-size: 12px;
-              }
+              body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+              .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+              .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+              .content { background: #f9fafb; padding: 30px; border-radius: 0 0 10px 10px; }
+              .button { display: inline-block; background: #667eea; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; margin: 20px 0; }
+              .footer { text-align: center; margin-top: 20px; color: #666; font-size: 14px; }
             </style>
           </head>
           <body>
             <div class="container">
               <div class="header">
-                <h2>🚀 New QSAT Registration</h2>
+                <h1>🚀 Welcome to QSAT Mission!</h1>
               </div>
               <div class="content">
-                <p class="intro">A new user has registered for the QSAT HAB Launch Program!</p>
+                <h2>Hello ${fullName}!</h2>
+                <p>Thank you for registering with the QSAT mission. We're thrilled to have you on board!</p>
                 
-                <div class="field">
-                  <div class="label">Full Name</div>
-                  <div class="value">${fullName}</div>
+                <p><strong>Your Registration Details:</strong></p>
+                <ul>
+                  <li><strong>Name:</strong> ${fullName}</li>
+                  <li><strong>Email:</strong> ${email}</li>
+                  <li><strong>Status:</strong> ${participationStatus}</li>
+                </ul>
+
+                <p>As a registered member, you'll receive:</p>
+                <ul>
+                  <li>✅ Exclusive mission updates</li>
+                  <li>✅ Free educational courses</li>
+                  <li>✅ Early access to special events</li>
+                  <li>✅ Community resources and support</li>
+                </ul>
+
+                <div style="text-align: center;">
+                  <a href="https://yourwebsite.com" class="button">Access Your Dashboard</a>
                 </div>
+
+                <p>Stay tuned for more updates. The future of quantum technology is here!</p>
                 
-                <div class="field">
-                  <div class="label">Email Address</div>
-                  <div class="value">${email}</div>
-                </div>
-                
-                <div class="field">
-                  <div class="label">Participation Status</div>
-                  <div class="value">${participationStatus}</div>
-                </div>
-                
-                <div class="field">
-                  <div class="label">Registration Time</div>
-                  <div class="value">${new Date().toLocaleString('en-US', {
-                    weekday: 'long',
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    timeZoneName: 'short'
-                  })}</div>
-                </div>
+                <p>Best regards,<br><strong>The QSAT Team</strong></p>
               </div>
               <div class="footer">
-                <p>This email was sent from the QSAT registration form</p>
-                <p>© ${new Date().getFullYear()} QSAT HAB Launch Program</p>
+                <p>© 2024 QSAT Mission. All rights reserved.</p>
               </div>
             </div>
           </body>
         </html>
       `,
-    });
+    })
+    console.log('User email sent successfully:', userEmailResult)
 
-    return NextResponse.json({ success: true, data });
-  } catch (error) {
-    console.error('Error sending registration email:', error);
+    console.log('Sending notification email to admin...')
+    // Send notification email to admin
+    const adminEmailResult = await resend.emails.send({
+      from: "QSAT Mission <onboarding@resend.dev>",
+      to: "qsattech@gmail.com",
+      subject: "New QSAT Registration",
+      html: `
+        <!DOCTYPE html>
+        <html>
+          <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+            <h2>New Registration Received</h2>
+            <p><strong>Full Name:</strong> ${fullName}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Participation Status:</strong> ${participationStatus}</p>
+            <p><strong>Registered at:</strong> ${new Date().toLocaleString()}</p>
+          </body>
+        </html>
+      `,
+    })
+    console.log('Admin email sent successfully:', adminEmailResult)
+
+    console.log('Registration completed successfully')
     return NextResponse.json(
-      { success: false, message: 'Failed to send registration email' },
+      { message: "Registration successful" },
+      { status: 200 }
+    )
+  } catch (error) {
+    console.error("Registration error:", error)
+    let errorMessage = "Unknown error";
+    let errorName = "";
+    let errorStack = "";
+
+    if (typeof error === "object" && error !== null) {
+      errorMessage = (error as { message?: string }).message ?? "Unknown error";
+      errorName = (error as { name?: string }).name ?? "";
+      errorStack = (error as { stack?: string }).stack ?? "";
+    }
+
+    console.error("Error details:", {
+      message: errorMessage,
+      name: errorName,
+      stack: errorStack
+    })
+    return NextResponse.json(
+      { message: `Failed to process registration: ${errorMessage}` },
       { status: 500 }
-    );
+    )
   }
 }

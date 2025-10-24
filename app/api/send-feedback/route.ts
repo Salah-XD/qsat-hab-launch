@@ -1,129 +1,87 @@
-import { Resend } from 'resend';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server"
+import { Resend } from "resend"
 
-const resend = new Resend('re_aFGL7xtw_6hH9jovhPHQnFxaKt1AEzXL6');
+const resend = new Resend("re_aFGL7xtw_6hH9jovhPHQnFxaKt1AEzXL6")
 
-export async function POST(request: Request) {
+export async function POST(req: NextRequest) {
+  console.log('=== Feedback API Called ===')
+  
   try {
-    const { experience, interestLevel } = await request.json();
+    const body = await req.json()
+    console.log('Request body received:', { experience: body.experience?.substring(0, 50), interestLevel: body.interestLevel })
+    
+    const { experience, interestLevel } = body
 
-    const data = await resend.emails.send({
-      from: 'QSAT Feedback <onboarding@resend.dev>',
-      to: ['qsattech@gmail.com'],
-      subject: '💬 New QSAT Feedback Submission',
+    // Validate input
+    if (!experience || !interestLevel) {
+      console.log('Validation failed: Missing fields')
+      return NextResponse.json(
+        { message: "All fields are required" },
+        { status: 400 }
+      )
+    }
+
+    console.log('Sending feedback email to admin...')
+    // Send feedback notification to admin
+    const feedbackEmailResult = await resend.emails.send({
+      from: "QSAT Mission <onboarding@resend.dev>",
+      to: "qsattech@gmail.com",
+      subject: "New QSAT Feedback Received 💬",
       html: `
         <!DOCTYPE html>
         <html>
           <head>
             <style>
-              body { 
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                line-height: 1.6; 
-                color: #333;
-                margin: 0;
-                padding: 0;
-                background-color: #f4f4f4;
-              }
-              .container { 
-                max-width: 600px; 
-                margin: 20px auto; 
-                background: white;
-                border-radius: 12px;
-                overflow: hidden;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-              }
-              .header { 
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                color: white; 
-                padding: 30px 20px;
-                text-align: center;
-              }
-              .header h2 {
-                margin: 0;
-                font-size: 24px;
-              }
-              .content { 
-                padding: 30px;
-              }
-              .intro {
-                font-size: 16px;
-                color: #555;
-                margin-bottom: 25px;
-              }
-              .field { 
-                margin-bottom: 20px;
-                border-left: 4px solid #667eea;
-                padding-left: 15px;
-              }
-              .label { 
-                font-weight: bold;
-                color: #667eea;
-                font-size: 14px;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-              }
-              .value { 
-                margin-top: 8px;
-                font-size: 16px;
-                color: #333;
-                white-space: pre-wrap;
-              }
-              .footer {
-                background: #f9f9f9;
-                padding: 20px;
-                text-align: center;
-                color: #777;
-                font-size: 12px;
-              }
+              body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+              .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+              .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+              .content { background: #f9fafb; padding: 30px; border-radius: 0 0 10px 10px; }
+              .feedback-box { background: white; padding: 20px; border-left: 4px solid #667eea; margin: 20px 0; border-radius: 5px; }
+              .label { font-weight: bold; color: #667eea; margin-bottom: 5px; }
             </style>
           </head>
           <body>
             <div class="container">
               <div class="header">
-                <h2>💬 New QSAT Feedback</h2>
+                <h1>💬 New Feedback Received</h1>
               </div>
               <div class="content">
-                <p class="intro">A user has submitted feedback for the QSAT HAB Launch Program!</p>
+                <h2>Feedback Details</h2>
                 
-                <div class="field">
-                  <div class="label">Experience/Feedback</div>
-                  <div class="value">${experience}</div>
+                <div class="feedback-box">
+                  <div class="label">Interest Level:</div>
+                  <p>${interestLevel}</p>
                 </div>
-                
-                <div class="field">
-                  <div class="label">Interest Level</div>
-                  <div class="value">${interestLevel}</div>
+
+                <div class="feedback-box">
+                  <div class="label">Experience Shared:</div>
+                  <p>${experience}</p>
                 </div>
-                
-                <div class="field">
-                  <div class="label">Submission Time</div>
-                  <div class="value">${new Date().toLocaleString('en-US', {
-                    weekday: 'long',
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    timeZoneName: 'short'
-                  })}</div>
-                </div>
-              </div>
-              <div class="footer">
-                <p>This email was sent from the QSAT feedback form</p>
-                <p>© ${new Date().getFullYear()} QSAT HAB Launch Program</p>
+
+                <p><strong>Submitted at:</strong> ${new Date().toLocaleString()}</p>
               </div>
             </div>
           </body>
         </html>
       `,
-    });
+    })
+    console.log('Feedback email sent successfully:', feedbackEmailResult)
 
-    return NextResponse.json({ success: true, data });
-  } catch (error) {
-    console.error('Error sending feedback email:', error);
+    console.log('Feedback submitted successfully')
     return NextResponse.json(
-      { success: false, message: 'Failed to send feedback email' },
+      { message: "Feedback submitted successfully" },
+      { status: 200 }
+    )
+  } catch (error) {
+    console.error("Feedback error:", error)
+    console.error("Error details:", {
+      message: error instanceof Error ? error.message : String(error),
+      name: error instanceof Error ? error.name : "Unknown",
+      stack: error instanceof Error ? error.stack : undefined
+    })
+    return NextResponse.json(
+      { message: `Failed to submit feedback: ${error instanceof Error ? error.message : String(error)}` },
       { status: 500 }
-    );
+    )
   }
 }

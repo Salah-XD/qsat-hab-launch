@@ -10,6 +10,7 @@ import { GallerySection } from "@/components/gallery-section"
 import { SupportersSection } from "@/components/supporters-section"
 import { AboutQSATSection } from "@/components/about-qsat-section"
 import { UpcomingEventsSection } from "@/components/upcoming-events-section"
+import { RegistrationPopup } from "@/components/registration-popup"
 import { Footer } from "@/components/footer"
 
 export default function QSATHABLaunchPage() {
@@ -20,6 +21,7 @@ export default function QSATHABLaunchPage() {
       <AboutSection />
       <MissionDataSection />
       <ParkSatSection />
+      <RegistrationPopup />
       <RegistrationSection />
       <GallerySection />
       <SupportersSection />
